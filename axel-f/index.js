@@ -1,10 +1,24 @@
-
- var intro =
- note(`
+cpm(117/4)
+var treble =  note(`
 <
-  [f@2 a@1.5 f [f]/2 b f e]
-  [f@2 c4@*1.5 f [f]/2 d4 c4 a]
-  [f c4 f4 [f]/2 e [e]/2 c g f]
-  [f ~]
+  [f3@4 a3@3 f3@2 f3 b3@2 f3@2 e3@2]
+  [f3@4 c4@3 f3@2 f3 d4@2 c4@2 a3@2]
+  [f3@2 c4@2 f4@2 f3 e3@2 e3 c3@2 g3@2 f3@2]
+  [f3 ~]
 >
-`).sound("gm_synth_bass_1").clip(.4) 
+`).sound("sawtooth").transpose(12).clip(.5).lpf(700)
+
+var bass = note(`<
+  [f3@4 f4@3 e3@2 e4 c3@2 c4@2 e3@2 ]
+  [f3@4 f4@3  ~@2 c3 c4@2 e4@2 f4@2]
+  [d3@4 d4@3 e3@2 e4 c3@2 c4@2 e3@2]
+  [f3@4 ~@4 ~ f34 c4@2 b3@2 a3@2]
+>`).sound("gm_electric_bass_finger").transpose(-24)
+
+$: arrange(
+  [8, bass],
+  [8, treble],
+  [8 , stack(treble, bass)]
+)
+
+
